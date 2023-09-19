@@ -1,5 +1,8 @@
 {
-  "admin-example.navigation.label": "Telemetry",
+  "admin-telemetry.navigation.label": "Telemetry",
   "admin/test": "test",
-  "store/test": "test"
+  "store/test": "test",
+  "admin-telemetry.navigation.search.kws": "telemetry, metrics, logs, tracings, metric, log, tracing",
+  "admin-telemetry.navigation.config": "Config",
+  "admin-telemetry.navigation.grafana": "Grafana"
 }

@@ -1,5 +1,6 @@
 {
   "section": "orders",
-  "titleId": "admin-example.navigation.label",
-  "path": "/admin/telemetry"
+  "titleId": "admin-telemetry.navigation.label",
+  "path": "/admin/telemetry",
+  "searchKeyWordsHelpers": "admin-telemetry.navigation.search.kws"
 }
