@@ -1,11 +1,17 @@
 import React, { FC } from 'react'
+import { Layout, PageBlock } from 'vtex.styleguide'
+
+import TelemetryActiveToggle from './TelemetryComponents/TelemetryActiveToggle'
 
 const Telemetry: FC = () => {
   return (
-    <>
-      <h1>Hello, World!</h1>
-      <p>I&apos;ll be a telemetry component</p>
-    </>
+    <Layout>
+      <h1>Telemetry</h1>
+      <PageBlock>
+        <TelemetryActiveToggle />
+        <p>I&apos;ll be a telemetry component</p>
+      </PageBlock>
+    </Layout>
   )
 }
 
