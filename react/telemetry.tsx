@@ -1,15 +1,18 @@
 import React, { FC } from 'react'
-import { Layout, PageBlock } from 'vtex.styleguide'
+import { Layout, PageBlock, Divider } from 'vtex.styleguide'
 
 import TelemetryActiveToggle from './TelemetryComponents/TelemetryActiveToggle'
+import Instruments from './TelemetryComponents/Instruments'
 
 const Telemetry: FC = () => {
   return (
     <Layout>
-      <h1>Telemetry</h1>
-      <PageBlock>
+      <PageBlock title="VTEX Telemetry" subtitle="Store Settings">
         <TelemetryActiveToggle />
-        <p>I&apos;ll be a telemetry component</p>
+        <div className="mv6">
+          <Divider />
+        </div>
+        <Instruments />
       </PageBlock>
     </Layout>
   )
