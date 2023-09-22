@@ -45,7 +45,7 @@ const Instruments: FC = () => {
       name: {
         type: 'string',
         title: 'Name',
-        width: 100,
+        width: 200,
       },
       description: {
         type: 'string',
