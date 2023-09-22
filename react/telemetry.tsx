@@ -7,7 +7,7 @@ import Instruments from './TelemetryComponents/Instruments'
 const Telemetry: FC = () => {
   return (
     <Layout>
-      <PageBlock title="VTEX Telemetry" subtitle="Store Settings">
+      <PageBlock title="VTEX Telemetry">
         <TelemetryActiveToggle />
         <div className="mv6">
           <Divider />

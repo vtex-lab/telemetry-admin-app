@@ -1,28 +1,51 @@
 /* eslint-disable react/display-name */
-import React, { FC } from 'react'
+import React, { FC, useState, useEffect } from 'react'
 import { Table } from 'vtex.styleguide'
 
+import { getInstrumentationConfig, setInstrumentationList } from '../provider'
+
+const storeId = 'localhost'
+
 const Instruments: FC = () => {
-  const mock = [
-    {
-      id: 'close-minicart-metrics',
-      name: 'Close Minicart Metrics',
-      description: 'get metrics for clicks on close minicart button',
-      active: false,
-    },
-    {
-      id: 'minicart-metrics',
-      name: 'Minicart Metrics',
-      description: 'get metrics for clicks on minicart button',
-      active: false,
-    },
-  ]
+  const [instrumttConfig, setInstrumttConfig] = useState([{}])
+  const [selectedRows, setSelectedRows] = useState([{}])
+
+  useEffect(() => {
+    ;(async () => {
+      const { instrumentations } = await getInstrumentationConfig(storeId)
+
+      const mappedInstrumentations = instrumentations.map((instrumentation) => {
+        return { ...instrumentation, instId: instrumentation.id }
+      })
+
+      const selected = mappedInstrumentations.filter((instrumentation) => {
+        return instrumentation.active
+      })
+
+      setSelectedRows(selected)
+      setInstrumttConfig(mappedInstrumentations)
+    })()
+  }, [])
+
+  function updateInstrumentations() {
+    const selectedRowsIds = selectedRows.map((row: any) => {
+      return row.instId
+    })
+
+    setInstrumentationList(storeId, selectedRowsIds)
+  }
+
+  function turnOffAllInstrumentations() {
+    setSelectedRows([])
+    setInstrumentationList(storeId, new Array<string>())
+  }
 
   const defaultSchema = {
     properties: {
       name: {
         type: 'string',
         title: 'Name',
+        width: 100,
       },
       description: {
         type: 'string',
@@ -33,16 +56,17 @@ const Instruments: FC = () => {
 
   return (
     <>
-      <h2 className="mt6 mb6">Instruments</h2>
+      <h2 className="mt6 mb6">Instrumentations</h2>
       <div className="mb5">
         <Table
           fullWidth
           schema={defaultSchema}
-          items={mock}
+          items={instrumttConfig}
           density="high"
           bulkActions={{
+            fixed: true,
             texts: {
-              secondaryActionsLabel: 'Actions',
+              secondaryActionsLabel: 'More',
               rowsSelected: (qty: any) => (
                 <React.Fragment>Selected rows: {qty}</React.Fragment>
               ),
@@ -51,12 +75,20 @@ const Instruments: FC = () => {
                 <React.Fragment>All rows selected: {qty}</React.Fragment>
               ),
             },
-            totalItems: mock.length,
-            onChange: () => {},
+            totalItems: instrumttConfig.length,
+            onChange: (params: any) => setSelectedRows(params.selectedRows),
             main: {
-              label: 'Main Action',
-              handleCallback: () => {},
+              label: 'Update',
+              handleCallback: () => updateInstrumentations(),
             },
+            others: [
+              {
+                label: 'Clear all',
+                isDangerous: true,
+                handleCallback: () => turnOffAllInstrumentations(),
+              },
+            ],
+            selectedRows,
           }}
         />
       </div>

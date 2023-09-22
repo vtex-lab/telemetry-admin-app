@@ -23,7 +23,7 @@ const TelemetryActiveToggle: FC = () => {
 
   return (
     <>
-      <h2 className="mt0 mb6">Active Telemetry:</h2>
+      <h2 className="mt0 mb6">Active Telemetry</h2>
 
       <Toggle
         label={active ? 'Telemetry Activated' : 'Telemetry Deactivated'}
